@@ -24,17 +24,31 @@ for info in animals_data:
         "type": fox_type
     })
 
+output = ""
 for animal in animals_info:
-    print(f"Name: {animal['name']}")
-    print(f"Diet: {animal['diet']}")
-    print(f"Location: {animal['location']}")
+    output += f"Name: {animal['name']}\n"
+    output += f"Diet: {animal['diet']}\n"
+    output += f"Location: {animal['location']}\n"
 
     if animal['type'] is not None:
-        print(f"Type: {animal['type']}")
+        output += f"Type: {animal['type']}\n"
 
-    print()
+    output += "\n"
+
+print(output)
 
 
+with open ("animals_template.html", "r") as file:
+    html_content = file.read()
+print(html_content)
+
+
+new_text = html_content.replace("__REPLACE_ANIMALS_INFO__", output)
+print(new_text)
+
+
+with open("updated_animals_template.html", "w") as file:
+    file.write(new_text)
 
 
 
