@@ -1,7 +1,7 @@
 import json
 
 
-def load_data (file_path):
+def load_data(file_path):
     """ Loads a JSON file """
     with open(file_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
@@ -26,13 +26,17 @@ for info in animals_data:
 
 output = ""
 for animal in animals_info:
+    name = animal['name']
+    if name == "Darwin’s fox":
+        name = name.replace("Darwin’s fox", "Darwins fox")
     output += '<li class="cards__item">'
-    output += f"Name: {animal['name']}<br/>\n"
-    output += f"Diet: {animal['diet']}<br/>\n"
-    output += f"Location: {animal['location']}<br/>\n"
+    output += '<div class="card__title">'f"Name: {animal['name']}"'</div>'
+    output += '<p class ="card__text" >'
+    output += '<strong>'"Diet: "'</strong>'f"{animal['diet']}"'<br/>'
+    output += '<strong>'"Location: "'</strong>'f"{animal['location']}"'<br/>'
 
     if animal['type'] is not None:
-        output += f"Type: {animal['type']}<br/>\n"
+        output += '<strong>'"Type: "'</strong>'f" {animal['type']}"'<br/>'
 
     output += "</li>"
 print(output)
