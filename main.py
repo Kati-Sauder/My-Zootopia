@@ -3,7 +3,7 @@ import json
 
 def load_data (file_path):
     """ Loads a JSON file """
-    with open(file_path, "r") as handle:
+    with open(file_path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
@@ -26,19 +26,19 @@ for info in animals_data:
 
 output = ""
 for animal in animals_info:
-    output += f"Name: {animal['name']}\n"
-    output += f"Diet: {animal['diet']}\n"
-    output += f"Location: {animal['location']}\n"
+    output += '<li class="cards__item">'
+    output += f"Name: {animal['name']}<br/>\n"
+    output += f"Diet: {animal['diet']}<br/>\n"
+    output += f"Location: {animal['location']}<br/>\n"
 
     if animal['type'] is not None:
-        output += f"Type: {animal['type']}\n"
+        output += f"Type: {animal['type']}<br/>\n"
 
-    output += "\n"
-
+    output += "</li>"
 print(output)
 
 
-with open ("animals_template.html", "r") as file:
+with open("animals_template.html", "r", encoding="utf-8") as file:
     html_content = file.read()
 print(html_content)
 
@@ -47,7 +47,7 @@ new_text = html_content.replace("__REPLACE_ANIMALS_INFO__", output)
 print(new_text)
 
 
-with open("updated_animals_template.html", "w") as file:
+with open("updated_animals_template.html", "w", encoding="utf-8") as file:
     file.write(new_text)
 
 
