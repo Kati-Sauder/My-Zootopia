@@ -19,6 +19,7 @@ def animal_info(animals_data):
         fox_type = info.get("characteristics", {}).get("type")
         science_name = info.get("taxonomy", {}).get("scientific_name")
         color = info.get("characteristics", {}).get("color")
+        skin_type = info.get("characteristics", {}).get("skin_type")
 
         animals_info.append({
             "name": name,
@@ -26,7 +27,8 @@ def animal_info(animals_data):
             "location": location,
             "type": fox_type,
             "scientific_name": science_name,
-            "color": color
+            "color": color,
+            "skin_type": skin_type
         })
     return animals_info
 
@@ -37,16 +39,19 @@ def serialize_animals_info(animal):
     output += '<div class="card__title">'f"Name: {animal['name']}"'</div>'
     output += '<p class ="card__text" >'
     output += '<ul >'
-    output += f'<li><strong>'"Diet: "'</strong>'f"{animal['diet']}"'<li/>'
-    output += f'<li><strong>'"Location: "'</strong>'f"{animal['location']}"'<li/>'
-    output += f'<li><strong>'"Scientific Name: "'</strong>'f"{animal['scientific_name']}"'<li/>'
-    output += f'<li><strong>'"Color: "'</strong>'f"{animal['color']}"'<li/>'
-    if animal['type'] is not None:
-        output += f'<li><strong>'"Type: "'</strong>'f" {animal['type']}"'<li/>'
+    output += f'<li><strong>'"Diet: "'</strong>'f"{animal['diet']}"'</li>'
+    output += f'<li><strong>'"Location: "'</strong>'f"{animal['location']}"'</li>'
+    output += f'<li><strong>'"Scientific Name: "'</strong>'f"{animal['scientific_name']}"'</li>'
+    output += f'<li><strong>'"Color: "'</strong>'f"{animal['color']}"'</li>'
+    if animal.get('skin_type'):
+        output += f'<li><strong>'"Skintype: "'</strong>'f"{animal['skin_type']}"'</li>'
+    if animal.get('type'):
+        output += f'<li><strong>'"Type: "'</strong>'f" {animal['type']}"'</li>'
     output += "</ul>"
     output += "</p>"
     output += "</li>"
     return output
+
 
 def generate_animals_html(data, template_path, output_path):
     animals_html = ''.join(serialize_animals_info(animal) for animal in data)
