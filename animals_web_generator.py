@@ -34,6 +34,11 @@ def animal_info(animals_data):
 
 
 def serialize_animals_info(animal):
+    """
+    Serializes the information of an animal into an HTML string.
+    This function takes a dictionary containing details about an animal and formats it
+    into a structured HTML list item with specific fields for display purposes.
+    """
     output = ""
     output += '<li class="cards__item">'
     output += '<div class="card__title">'f"Name: {animal['name']}"'</div>'
@@ -54,6 +59,12 @@ def serialize_animals_info(animal):
 
 
 def generate_animals_html(data, template_path, output_path):
+    """
+    Generates an HTML file with animal information.
+    This function takes a list of animal dictionaries, reads an HTML template,
+    inserts the serialized animal information into a placeholder within the template,
+    and writes the result to an output file.
+    """
     animals_html = ''.join(serialize_animals_info(animal) for animal in data)
     try:
         with open(template_path, "r", encoding="utf-8") as file:
@@ -67,6 +78,12 @@ def generate_animals_html(data, template_path, output_path):
 
 
 def main():
+    """
+    Main function to process animal data and generate an HTML file.
+    This function manages the flow of loading animal data, processing it,
+    and generating an updated HTML file based on a template. It ensures that
+    all required steps are executed in sequence.
+    """
     animals_data = load_data('animals_data.json')
     if not animals_data:
         return
